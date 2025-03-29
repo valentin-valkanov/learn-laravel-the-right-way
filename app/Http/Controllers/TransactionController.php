@@ -8,6 +8,7 @@ class TransactionController extends Controller
 {
     public function index(): string
     {
+        echo route('transactions.documents', ['transactionId' => 5]) . '<br />';
         return 'Transaction page';
     }
 
@@ -24,5 +25,10 @@ class TransactionController extends Controller
     public function store(Request $request): string
     {
         return 'Transaction Created';
+    }
+
+    public function documents(): string
+    {
+        return 'Transaction Documents';
     }
 }
