@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Middleware\AssignRequestId;
+use App\Http\Middleware\CheckUserRole;
+use App\Http\Middleware\SomeOtherMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -18,6 +20,10 @@ return Application::configure(basePath: dirname(__DIR__))
         }
     )
     ->withMiddleware(function (Middleware $middleware) {
+        $middleware->alias(
+            ['role' => CheckUserRole::class]
+        );
+
         $middleware->append(AssignRequestId::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {

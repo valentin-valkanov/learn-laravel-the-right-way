@@ -14,10 +14,11 @@ class CheckUserRole
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, string $role): Response
     {
-        $user = ['id'=> 123, 'name' => 'Val', 'role' => 'not-admin'];
-        if ($user['role'] === 'admin'){
+        dump('Checking User Role: ' . $role);
+        $user = ['id'=> 123, 'name' => 'Val', 'role' => 'admin'];
+        if ($user['role'] === $role){
             return $next($request);
         }
         abort(404);

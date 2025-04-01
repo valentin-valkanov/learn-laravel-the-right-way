@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
 
-class TransactionController extends Controller
+class TransactionController extends Controller implements HasMiddleware
 {
     public function index(Request $request): string
     {
@@ -30,5 +31,12 @@ class TransactionController extends Controller
     public function documents(): string
     {
         return 'Transaction Documents';
+    }
+
+    public static function middleware()
+    {
+        return [
+            ''
+        ];
     }
 }
