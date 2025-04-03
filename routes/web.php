@@ -7,7 +7,8 @@ use App\Http\Middleware\CheckUserRole;
 use App\Http\Middleware\SomeOtherMiddleware;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
+Route::get('/', function (\App\Contracts\PaymentProcessor $paymentProcessor) {
+    dd(app());
     return view('welcome');
 });
 

@@ -6,6 +6,8 @@ use App\Contracts\PaymentProcessor;
 use App\Services\SalesTaxCalculator;
 use App\Services\Stripe;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,9 +18,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(PaymentProcessor::class, function (Application $app) {
-            return $app->make(Stripe::class, ['config' => []]);
-        });
     }
 
     /**
@@ -26,6 +25,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
     }
 }

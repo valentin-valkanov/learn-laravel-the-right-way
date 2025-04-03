@@ -11,21 +11,16 @@ use Illuminate\Support\Facades\App;
 
 class TransactionController extends Controller
 {
-    public function __construct(private readonly PaymentProcessor $paymentProcessor, private readonly Container $container)
-    {
-    }
 
     public function index(Request $request): string
     {
-        dump($this->container->make(PaymentProcessor::class));
-        echo $request->headers->get('X-Request-Id') . '<br />';
         return 'Transaction page';
     }
 
-    public function show(int $transactionId, TransactionService $transactionService): string
+    public function show(int $transactionId, TransactionService $transactionService, PaymentProcessor $paymentProcessor): string
     {
-        dump($this->paymentProcessor);
         $transaction = $transactionService->findTransaction($transactionId);
+        $paymentProcessor->process($transaction);
         return 'Transaction: ' . $transactionId . ', ' . $transaction['amount'];
     }
 
